@@ -69,10 +69,38 @@
 
     data.forEach(item => {
         if (res[item.chanel] === undefined) {
-            res[item.chanel] = [item.ratio];
-        } else {
-            res[item.chanel].push(item.ratio);
+            res[item.chanel] = [];
         }
+        res[item.chanel].push(item.ratio);
     });
-    console.log(res);
+
+    function groupBy(array, property) {
+        const res = {};
+        array.forEach(item => {
+            //if (res[item[property]] === undefined) {
+            if (!res.hasOwnProperty(item[property])) {
+                res[item[property]] = [];
+            }
+            res[item[property]].push(item);
+        });
+        return res;
+    }
+    const res1 = groupBy(data, 'chanel');
+    const res2 = groupBy(data, 'ratio');
+    console.log(res1);
+    console.log(res2);
+
+    let user = {
+        firstName: 'Vasya',
+        lastName: 'Pupkin',
+        fullName() {
+            return `${this.firstName} ${this.lastName}`;
+        }
+    };
+
+    console.log(user.fullName());
+    user.firstName = 'Petya';
+    const testUser = user;
+    user = '';
+    console.log(testUser.fullName())
 })();
