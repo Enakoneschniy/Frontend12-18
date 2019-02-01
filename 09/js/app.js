@@ -44,16 +44,49 @@ const basket = new Basket();
 function generateId() {
     return `f${(new Date().getTime()).toString(16)}`;
 }
+let $title;
+let $price;
+let $id;
 
 class Product {
     constructor(title, price) {
-        this.title = title;
-        this.price = price;
-        this.id = generateId()
+        $title = title;
+        $price = price;
+        $id = generateId()
     }
-    getPrice() {
-        return `$${this.price}`;
+    setPrice(value) {
+        $price = !isNaN(value) ? value : $price;
+        return this;
+    }
+    static getPrice() {
+        return $price;
+    }
+    getFormattedPrice() {
+        return `$${$price}`;
+    }
+    get formattedPrice() {
+        return `GET: $${$price}`;
+    }
+    set formattedPrice(value) {
+        if(!isNaN(value)) {
+            $price = value;
+        } else {
+            const tmpValue = parseFloat(value.replace('$',''));
+            $price = !isNaN(tmpValue) ? tmpValue : $price;
+        }
     }
 }
+const product = new Product('iPhone XS Max', 1500);
+console.log(product.getFormattedPrice());
+product.setPrice(1000);
+console.log(product.getFormattedPrice());
+product.setPrice('a,nsdgfhj.k');
+console.log(product.getFormattedPrice());
+console.log(product.setPrice(56756).formattedPrice);
+product.formattedPrice = '$787878';
+console.log(product.formattedPrice);
+
+
+
 
 
