@@ -64,7 +64,6 @@
         { chanel: "Paid Social Media", ratio: 0.615 },
         { chanel: "Earned Social Media", ratio: 0.615 },
     ];
-
     const res = {};
 
     data.forEach(item => {
@@ -93,11 +92,13 @@
     let user = {
         firstName: 'Vasya',
         lastName: 'Pupkin',
-        fullName() {
+        /*fullName() {
             return `${this.firstName} ${this.lastName}`;
-        }
+        }*/
     };
-
+    user.fullName = function() {
+        return `${this.firstName} ${this.lastName}`;
+    };
     console.log(user.fullName());
     user.firstName = 'Petya';
     const testUser = user;
