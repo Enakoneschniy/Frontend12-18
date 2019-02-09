@@ -21,7 +21,7 @@ class Cat extends Animal {
         alert(`Meow! I am ${this.name}`);
     }
 }
-
+// sudo npm i -g npm
 class LittleCat extends Cat {
 
 }
