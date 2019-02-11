@@ -44,3 +44,42 @@ function onClick(event) {
         alert('Hello Artem!');
     }
 }
+
+
+if (event.target.classList.contains('btn'))
+
+
+
+
+ const products = [
+     new Product('title', 300),
+     new Product('title1', 300),
+     new Product('title2', 300),
+     new Product('title3', 300),
+     new Product('title4', 300),
+ ];
+class Product {
+    constructor(title, price) {
+        this.title = '';
+        this.price = '';
+        this.img = 'https://placeimg.com/640/480/any';
+        this.id = '';
+    }
+    // get formatted price
+}
+class Catalog {
+    constructor() {
+        this.products = [];
+    }
+    add(product) {
+
+    }
+    render(selector) {
+
+    }
+}
+
+
+
+
+
