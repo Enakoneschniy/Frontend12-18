@@ -51,13 +51,13 @@ if (event.target.classList.contains('btn'))
 
 
 
- const products = [
-     new Product('title', 300),
-     new Product('title1', 300),
-     new Product('title2', 300),
-     new Product('title3', 300),
-     new Product('title4', 300),
- ];
+const products = [
+ new Product('title', 300),
+ new Product('title1', 300),
+ new Product('title2', 300),
+ new Product('title3', 300),
+ new Product('title4', 300),
+];
 class Product {
     constructor(title, price) {
         this.title = '';
@@ -77,6 +77,14 @@ class Catalog {
     render(selector) {
 
     }
+}
+
+class Cart {
+    // constructor
+    // add
+    // remove
+    // renderSmall
+    // renderFull
 }
 
 
