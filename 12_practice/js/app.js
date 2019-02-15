@@ -59,6 +59,8 @@ function existsProduct(item) {
 
 class Cart {
     constructor(options) {
+        this.smallCartSelector = options.smallCartSelector;
+        this.fullCartSelector = options.fullCartSelector;
         this.items = [];
     }
     add(product) {
@@ -87,9 +89,118 @@ class Cart {
         const index = this.items.findIndex(existsProduct.bind(id));
         this.items.splice(index, 1)
     }
+    renderSmallCart() {
+
+    }
+    renderFullCart() {
+
+    }
 }
 
-const cart = new Cart();
+const cart = new Cart({
+    smallCartSelector: '#small-cart',
+    fullCartSelector: '#full-cart'
+});
+
+function loading(disk, func) {
+    console.log(`Loading from ${disk} disk`);
+    setTimeout(func, 2000);
+}
+function injectDisk(disk, func) {
+    console.log(`Please inject ${disk} disk`);
+    setTimeout(() => {
+        func(disk)
+    }, 1000);
+}
+
+/*injectDisk('d1', function (disk) {
+    loading(disk, function () {
+        injectDisk('d2', function (disk) {
+            loading(disk, function () {
+                injectDisk('d3', function (disk) {
+                    loading(disk, function () {
+                        injectDisk('d4', function (disk) {
+                            loading(disk, function () {
+                                console.log('Done!');
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+});*/
+function loadingPromise(disk) {
+    return new Promise(function (resolve, reject) {
+        console.log(`Loading from ${disk} disk`);
+        setTimeout(function () {
+            if (Math.random() < 0.5) {
+                reject('Loading error');
+            }
+            resolve();
+        }, 2000);
+    });
+}
+/*function resolve() {
+
+}
+function reject() {
+
+}
+class Promise {
+    constructor(func){
+        func(resolve, reject)
+    }
+}*/
+function injectDiskPromise(disk) {
+    return new Promise(function (resolve) {
+        console.log(`Please inject ${disk} disk`);
+        setTimeout(() => {
+            resolve(disk)
+        }, 1000);
+    });
+}
+
+/*injectDiskPromise('d1')
+    .then(loadingPromise)
+    .then(() => injectDiskPromise('d2'))
+    .then(loadingPromise)
+    .then(() => injectDiskPromise('d3'))
+    .then(loadingPromise)
+    .then(() => injectDiskPromise('d4'))
+    .then(loadingPromise)
+    .then(() => console.log('Done!'))
+    .catch(() => {
+        console.log('loading error!');
+    });*/
+
+/*fetch('google.com',{email, password})
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});*/
+
+async function loadingPromise1(disk) {
+     console.log(`Loading from ${disk} disk`);
+     if (Math.random() < 0.5) {
+         throw 'Error';
+     }
+     return disk;
+}
+(async () => {
+    try {
+        await loadingPromise(await injectDiskPromise('d1'));
+        await loadingPromise(await injectDiskPromise('d2'));
+        await loadingPromise(await injectDiskPromise('d3'));
+        await loadingPromise(await injectDiskPromise('d4'));
+    } catch (error) {
+        console.log(error);
+    }
+
+})();
+
 
 
 
