@@ -53,12 +53,24 @@ class Catalog {
 }
 const catalog = new Catalog('#app');
 
+function existsProduct(item) {
+    return item.id === this;
+}
+
 class Cart {
     constructor(options) {
         this.items = [];
     }
     add(product) {
-        if (!!this.items.find(item => item.id === product.id)) {
+        const index = this.items.findIndex(existsProduct.bind(product.id));
+        if (index !== -1) {
+            ++this.items[index].quantity;
+        } else {
+            this.items.push(Object.assign(product, {
+                quantity: 1
+            }));
+        }
+        /*if (!!this.items.find(item => item.id === product.id)) {
             this.items = this.items.map(item => {
                 if (item.id === product.id) {
                     ++item.quantity;
@@ -69,12 +81,15 @@ class Cart {
             this.items.push(Object.assign(product, {
                 quantity: 1
             }));
-        }
+        }*/
     }
-    remove(productId) {
-
+    remove(id) {
+        const index = this.items.findIndex(existsProduct.bind(id));
+        this.items.splice(index, 1)
     }
 }
+
+const cart = new Cart();
 
 
 
