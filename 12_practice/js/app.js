@@ -36,6 +36,9 @@ class Catalog {
         this.products.push(product);
         this.render()
     }
+    get count() {
+        return this.products.length
+    }
     render() {
         const container = document.querySelector(this.selector);
         let productsHtml = this.products.reduce((html, product) => html + product.renderedProduct, '');
@@ -49,4 +52,29 @@ class Catalog {
     }
 }
 const catalog = new Catalog('#app');
+
+class Cart {
+    constructor(options) {
+        this.items = [];
+    }
+    add(product) {
+        if (!!this.items.find(item => item.id === product.id)) {
+            this.items = this.items.map(item => {
+                if (item.id === product.id) {
+                    ++item.quantity;
+                }
+                return item;
+            })
+        } else {
+            this.items.push(Object.assign(product, {
+                quantity: 1
+            }));
+        }
+    }
+    remove(productId) {
+
+    }
+}
+
+
 
